@@ -1,0 +1,69 @@
+.Control {
+  width: 80%;
+  margin: 0 auto;
+  height: auto;
+  background-color: lightgray;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.Button {
+  border: 0;
+  margin: 5px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02857em;
+  line-height: 1.75;
+  min-width: 75px;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.Button:focus {
+  outline: none;
+}
+
+.Button:disabled {
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.404);
+  cursor: not-allowed;
+}
+
+.Less {
+  background-color: #ff6969;
+  color: white;
+}
+
+.More {
+  background-color: #ffe75c;
+}
+
+.Order {
+  background-color: #f60257;
+  color: white;
+  font-size: 1.25rem;
+  margin: 20px auto 10px auto;
+}
+
+.Controls {
+  display: inline-block;
+  width: 23%;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.555);
+  padding: 15px;
+  border-radius: 4px;
+  margin: 5px;
+}
+
+.IngName {
+  text-transform: capitalize;
+  background-color: rgb(202, 202, 202);
+  padding: 10px;
+  border-radius: 4px;
+}
