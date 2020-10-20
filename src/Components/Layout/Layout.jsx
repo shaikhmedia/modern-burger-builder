@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import BurgerBuilder from "../Burger/BurgerBuilder";
+import BurgerBuilder from "../Container/BurgerBuilder";
+import Navbar from "./Navbar/Navbar";
 
 // Layout of the App
-const layout = () => {
+const layout = (props) => {
   return (
-    <div>
+    <React.Fragment>
       {/* Navbar */}
-      <p>Navbar</p>
+      <Navbar />
       {/* Builder */}
       <BurgerBuilder />
-    </div>
+    </React.Fragment>
   );
 };
 

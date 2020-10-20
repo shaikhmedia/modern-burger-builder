@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import Burger from "./Burger";
-import BurgerControls from "./BurgerControls";
+import Burger from "../Burger/Burger";
+import BurgerControls from "../Burger/BurgerController/BurgerControls";
+import Modal from "../Layout/Modal/Modal";
+// import Backdrop from "../Layout/Backdrop/Backdrop";
 
 const pricing = {
   cheese: 0.5,
@@ -19,7 +21,7 @@ class BurgerBuilder extends Component {
       salad: 0,
     },
     totalPrice: 4,
-    purchaseAble: false,
+    showModal: false,
   };
   // Disable less and orderNow button if there is no ingredients added
   // handlePurchaseAble = (ingredients) => {
@@ -76,6 +78,16 @@ class BurgerBuilder extends Component {
     // this.handlePurchaseAble(ingredients);
   };
 
+  // Show the modal and backdrop
+  handleShowModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  // Hide the modal and backdrop
+  handleHideModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
     // Copying the ingredient object
     const disableStatus = {
@@ -92,11 +104,18 @@ class BurgerBuilder extends Component {
       <div>
         <Burger ingredients={this.state.ingredients} />
         <BurgerControls
+          showModal={this.handleShowModal}
           ingredients={this.state.ingredients}
           price={this.state.totalPrice}
           addIngredient={this.handleAddIngredient}
           removeIngredient={this.handleRemoveIngredient}
           disableInfo={disableStatus}
+        />
+        <Modal
+          hide={this.handleHideModal}
+          show={this.state.showModal}
+          price={this.state.totalPrice}
+          Ing={this.state.ingredients}
         />
       </div>
     );

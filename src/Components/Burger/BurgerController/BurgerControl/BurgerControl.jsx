@@ -8,18 +8,20 @@ const burgerControl = (props) => {
     <div key={cur} className={Styles.Controls}>
       <h3 className={Styles.IngName}>{cur}</h3>
       <button
-        //Pass the type to add and remove item handler
+        //Pass the type to add correct item to the burger
         onClick={() => props.addIng(cur)}
         className={`${Styles.Button} ${Styles.More}`}
       >
-        More
+        Add
       </button>
       <button
+        // Disable the button when there is no ingredient
         disabled={props.disabled[cur]}
+        //Pass the type to remove correct item to the burger
         onClick={() => props.removeIng(cur)}
         className={`${Styles.Button} ${Styles.Less}`}
       >
-        Less
+        Remove
       </button>
     </div>
   ));

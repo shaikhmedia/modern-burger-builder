@@ -1,5 +1,5 @@
 import React from "react";
-import Ingredients from "./Ingredients";
+import Ingredients from "./Ingredients/Ingredients";
 import Styles from "../Burger/Burger.module.css";
 
 const burger = (props) => {
@@ -16,7 +16,7 @@ const burger = (props) => {
   //console.log(updatedIngredients);
 
   if (updatedIngredients.length === 0) {
-    updatedIngredients = <p>Please add ingredients</p>;
+    updatedIngredients = <p className={Styles.Ing}>Please add ingredients</p>;
   }
 
   return (

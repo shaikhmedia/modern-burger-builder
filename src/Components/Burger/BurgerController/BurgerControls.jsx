@@ -1,6 +1,6 @@
 import React from "react";
-import BurgerControl from "./BurgerControl";
-import Style from "./BurgerControl.module.css";
+import BurgerControl from "../BurgerController/BurgerControl/BurgerControl";
+import Style from "../BurgerController/BurgerControl/BurgerControl.module.css";
 
 const burgerControls = (props) => {
   return (
@@ -14,7 +14,12 @@ const burgerControls = (props) => {
         removeIng={props.removeIngredient}
         addIng={props.addIngredient}
       />
-      <button className={`${Style.Order} ${Style.Button}`}>Order Now</button>
+      <button
+        onClick={props.showModal}
+        className={`${Style.Order} ${Style.Button}`}
+      >
+        Order Now
+      </button>
     </div>
   );
 };

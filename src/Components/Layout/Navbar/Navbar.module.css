@@ -1,0 +1,32 @@
+.Navbar {
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: #1e3d6d;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.Navbar ul {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Navbar ul li {
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.Navbar a {
+  color: #f8f8f8;
+  text-decoration: none;
+  padding: 5px 8px;
+  font-weight: 500;
+}
+
+.Navbar ul li:last-child {
+  border-left: 1px solid white;
+}
