@@ -16,7 +16,7 @@ const burgerControl = (props) => {
       </button>
       <button
         // Disable the button when there is no ingredient
-        disabled={props.disabled[cur]}
+        disabled={props.disablStatus[cur]}
         //Pass the type to remove correct item to the burger
         onClick={() => props.removeIng(cur)}
         className={`${Styles.Button} ${Styles.Less}`}

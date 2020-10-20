@@ -22,16 +22,8 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 4,
     showModal: false,
+    disableOrder: true,
   };
-  // Disable less and orderNow button if there is no ingredients added
-  // handlePurchaseAble = (ingredients) => {
-  //   // Convert the ingredient object's values to an array and reduce it to get the total
-  //   const sum = Object.values(ingredients).reduce((acc, cur) => {
-  //     return acc + cur;
-  //   }, 0);
-  //   // Return true if the sum is less than 1
-  //   return sum < 1;
-  // };
 
   // Add item in burger
   handleAddIngredient = (type) => {
@@ -46,14 +38,16 @@ class BurgerBuilder extends Component {
     ingredients[type] = increaseAmount;
 
     const addedPrice = pricing[type];
-    const newPrice = this.state.totalPrice + addedPrice;
+    const updatedPrice = this.state.totalPrice + addedPrice;
 
-    // Update the state with updated object
+    // Update the state with updaged ingredients object and total price
     this.setState({
       ingredients: ingredients,
-      totalPrice: newPrice,
+      totalPrice: updatedPrice,
     });
-    // this.handlePurchaseAble(ingredients);
+
+    // Pass the updated price to update orderDisable state
+    this.handleDisableOrder(updatedPrice);
   };
 
   // Remove item from burger
@@ -74,8 +68,11 @@ class BurgerBuilder extends Component {
     const price = this.state.totalPrice;
     const updatedPrice = price - pricing[type];
 
+    // Update the state with updaged ingredients object and total price
     this.setState({ ingredients: ingredients, totalPrice: updatedPrice });
-    // this.handlePurchaseAble(ingredients);
+
+    // Pass the updated price to update orderDisable state
+    this.handleDisableOrder(updatedPrice);
   };
 
   // Show the modal and backdrop
@@ -88,28 +85,34 @@ class BurgerBuilder extends Component {
     this.setState({ showModal: false });
   };
 
+  // Disable order button if the total price is less than or equal to 4
+  handleDisableOrder = (updatedPrice) => {
+    this.setState({ disableOrder: updatedPrice <= 4 });
+  };
+
   render() {
     // Copying the ingredient object
-    const disableStatus = {
+    const disableIngBtn = {
       ...this.state.ingredients,
     };
 
-    // Conver the object to array and map through to change the value of the items either true or false
-    Object.keys(disableStatus).map((cur) => {
-      disableStatus[cur] = disableStatus[cur] <= 0;
+    // Convert the object to array and map through to change the value of the items either true or false
+    Object.keys(disableIngBtn).map((cur) => {
+      disableIngBtn[cur] = disableIngBtn[cur] <= 0;
     });
 
     return (
-      // Return Burger and BurgerControl component to Layout
+      // Return Burger, BurgerControl and Modal components to Layout
       <div>
         <Burger ingredients={this.state.ingredients} />
         <BurgerControls
+          orderDisable={this.state.disableOrder}
           showModal={this.handleShowModal}
           ingredients={this.state.ingredients}
           price={this.state.totalPrice}
           addIngredient={this.handleAddIngredient}
           removeIngredient={this.handleRemoveIngredient}
-          disableInfo={disableStatus}
+          ingDisable={disableIngBtn}
         />
         <Modal
           hide={this.handleHideModal}

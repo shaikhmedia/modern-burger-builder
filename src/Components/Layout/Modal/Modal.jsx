@@ -13,7 +13,7 @@ const modal = (props) => {
   return props.show ? (
     <React.Fragment>
       <Backdrop hiden={props.hide} />
-      <div className={Styles.Modal}>
+      <div className={`${Styles.Modal} ${Styles.showModal}`}>
         <h3>Your Order</h3>
         <p>A delicious burger with following ingredients:</p>
         {ingList}

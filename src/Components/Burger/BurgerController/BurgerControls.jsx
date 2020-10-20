@@ -10,11 +10,12 @@ const burgerControls = (props) => {
       </p>
       <BurgerControl
         ing={props.ingredients}
-        disabled={props.disableInfo}
+        disablStatus={props.ingDisable}
         removeIng={props.removeIngredient}
         addIng={props.addIngredient}
       />
       <button
+        disabled={props.orderDisable}
         onClick={props.showModal}
         className={`${Style.Order} ${Style.Button}`}
       >
