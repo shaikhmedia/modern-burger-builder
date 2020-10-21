@@ -19,6 +19,15 @@ const modal = (props) => {
         {ingList}
         <h4>Total Price: ${props.price.toFixed(2)}</h4>
         <p>Continue to checkout?</p>
+        <div>
+          <button className={`${Styles.Button} ${Styles.Yes}`}>Yes</button>
+          <button
+            onClick={props.hide}
+            className={`${Styles.Button} ${Styles.Cancel}`}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </React.Fragment>
   ) : null;

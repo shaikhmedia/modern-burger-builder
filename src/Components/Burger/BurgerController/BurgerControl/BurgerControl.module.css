@@ -70,3 +70,46 @@
   border-radius: 4px;
   margin: 5px 0px 15px 0;
 }
+
+@media (max-width: 649px) {
+  .Control {
+    width: 100%;
+    margin-top: 0px;
+  }
+
+  .Controls {
+    width: 40%;
+  }
+
+  .IngName {
+    margin: 0px 0px 10px 0px;
+    padding: 8px 10px;
+  }
+
+  .Button {
+    margin: 3px;
+  }
+}
+
+@media (max-width: 499px) {
+  .Control {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .Controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .IngName {
+    margin: 0px 5px 0px 0px;
+    padding: 8px 10px;
+  }
+
+  .Button {
+    margin: 3px;
+  }
+}
