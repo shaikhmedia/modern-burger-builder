@@ -1,10 +1,10 @@
 import React from "react";
 import BurgerControl from "../BurgerController/BurgerControl/BurgerControl";
-import Style from "../BurgerController/BurgerControl/BurgerControl.module.css";
+import Style from "../BurgerController/BurgerControls.module.css";
 
 const burgerControls = (props) => {
   return (
-    <div className={Style.Control}>
+    <div className={Style.Controls}>
       <p>
         <strong>Total Price:</strong> ${props.price.toFixed(2)}
       </p>

@@ -4,43 +4,18 @@
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #1e3d6d;
   padding: 10px 12px 10px 20px;
-  margin-bottom: 20px;
 }
 
 .Logo {
-  height: 50px;
-  width: 50px;
-  background-color: #ffffff;
-  border-radius: 5px;
+  height: 55px;
+  width: 55px;
 }
 
 .Logo img {
   height: 80%;
-}
-
-.Navbar ul {
-  display: flex;
-  align-items: center;
-  list-style: none;
-}
-
-.Navbar ul li a:hover,
-.Navbar ul li a:active,
-.Navbar ul li a.active {
-  color: #ff9552;
-}
-
-.Navbar ul li a {
-  text-decoration: ;
-  color: white;
-  text-decoration: none;
-  padding: 8px;
-}
-
-.Navbar ul li:last-child {
-  border-left: 1px solid white;
 }
 
 @media (max-width: 649px) {

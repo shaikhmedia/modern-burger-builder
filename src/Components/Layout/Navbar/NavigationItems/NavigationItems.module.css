@@ -1,0 +1,28 @@
+.Items {
+  display: flex;
+  list-style: none;
+}
+
+.Items li a {
+  color: white;
+  text-decoration: none;
+  padding: 8px;
+}
+
+.Items li a:hover,
+.Items li a.active {
+  color: coral;
+}
+
+.Items li:last-child {
+  border-left: 1px solid white;
+}
+
+@media (max-width: 499px) {
+  .Items {
+    display: none;
+  }
+  .Items li a {
+    color: black;
+  }
+}

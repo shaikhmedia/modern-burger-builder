@@ -1,0 +1,28 @@
+.Footer {
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e3d6d;
+  padding: 10px 20px;
+  color: rgb(159, 169, 179);
+  border-top: 1px solid lightslategrey;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.Footer ul li {
+  list-style: none;
+  padding: 5px;
+}
+
+.Footer ul li a {
+  color: coral;
+  text-decoration: none;
+}
+
+.Footer ul li a:hover {
+  color: white;
+}
