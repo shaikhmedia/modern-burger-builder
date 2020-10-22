@@ -1,15 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Styles from "./SideDrawer.module.css";
-import NavigationItems from "../Navbar/NavigationItems/NavigationItmes";
+import Backdrop from "../Backdrop/Backdrop";
 
 const sideDrawer = (props) => {
-  if (props.toggleSideDrawer) {
+  if (props.sideDrawerStatus) {
     return (
-      <React.Fragment>
-        <div className={Styles.SideDrawer}>
-          <NavigationItems />
-        </div>
-      </React.Fragment>
+      <Fragment>
+        <div className={Styles.SideDrawer}>{props.children}</div>
+        <Backdrop hiden={props.SDStatus} />
+      </Fragment>
     );
   } else {
     return null;

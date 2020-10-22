@@ -4,6 +4,7 @@ import Navbar from "./Navbar/Navbar";
 import SideDrawer from "../Layout/SideDrawer/SideDrawer";
 import Footer from "../Layout/Footer/Footer";
 import EnvironmentalConcerns from "../Layout/EnvironmentalConcerns/EnvironmentalConcerns";
+import NavigationItems from "../Layout/Navbar/NavigationItems/NavigationItmes";
 
 // Layout of the App
 class Layout extends Component {
@@ -11,20 +12,20 @@ class Layout extends Component {
     sideDrawerShow: false,
   };
 
-  handleSideDrawerToggle = (prevSate) => {
-    this.setState({
-      sideDrawerShow: this.state.sideDrawerShow !== this.prevSate,
-    });
+  handleSideDrawerToggle = (prevState) => {
+    this.setState({ sideDrawerShow: prevState != this.state.sideDrawerShow });
   };
 
   render() {
     return (
       <React.Fragment>
         {/* SideDrawer */}
-        <SideDrawer />
+        <SideDrawer SDStatus={this.state.sideDrawerShow}>
+          <NavigationItems sideDrawerStatus={this.state.sideDrawerShow} />
+        </SideDrawer>
 
         {/* Navbar */}
-        <Navbar />
+        <Navbar openSideDrawer={this.handleSideDrawerToggle} />
 
         {/* Builder */}
         <BurgerBuilder />

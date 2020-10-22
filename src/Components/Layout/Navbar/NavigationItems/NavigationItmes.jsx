@@ -1,9 +1,13 @@
 import React from "react";
 import Styles from "./NavigationItems.module.css";
 
-const navigationItems = () => {
+const navigationItems = (props) => {
+  let classes = [Styles.Items];
+  if (props.sideDrawerStatus) {
+    classes = [Styles.SDItems];
+  }
   return (
-    <ul className={Styles.Items}>
+    <ul className={classes.join(" ")}>
       <li>
         <a href="">Order Summary</a>
       </li>

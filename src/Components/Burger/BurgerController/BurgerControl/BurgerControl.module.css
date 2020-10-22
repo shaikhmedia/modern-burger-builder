@@ -55,12 +55,8 @@
 
 @media (max-width: 649px) {
   .Control {
-    width: 100%;
+    width: 45%;
     margin-top: 0px;
-  }
-
-  .Controls {
-    width: 40%;
   }
 
   .IngName {
@@ -75,23 +71,20 @@
 
 @media (max-width: 499px) {
   .Control {
-    width: 100%;
-    margin-top: 15px;
-  }
-
-  .Controls {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    width: 90%;
+    margin-top: 15px;
   }
 
   .IngName {
     margin: 0px 5px 0px 0px;
     padding: 8px 10px;
+    width: 90%;
   }
 
   .Button {
-    margin: 3px;
+    margin-top: 10px;
   }
 }

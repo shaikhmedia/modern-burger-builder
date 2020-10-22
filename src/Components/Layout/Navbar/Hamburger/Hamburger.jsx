@@ -4,7 +4,7 @@ import MenuIcon from "../../../../Assets/menu.png";
 
 const hamburger = (props) => {
   return (
-    <div onClick={props.toggleSideDrawer}>
+    <div onClick={props.sideDrawerOpen}>
       <img className={Styles.MenuIcon} src={MenuIcon} alt="Menu Icon" />
     </div>
   );

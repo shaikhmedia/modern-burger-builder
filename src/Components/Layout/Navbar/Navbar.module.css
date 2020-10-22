@@ -7,6 +7,7 @@
   align-items: center;
   background-color: #1e3d6d;
   padding: 10px 12px 10px 20px;
+  margin-bottom: 20px;
 }
 
 .Logo {
@@ -19,6 +20,12 @@
 }
 
 @media (max-width: 649px) {
+  .Navbar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 499px) {
   .Navbar {
     width: 100%;
   }

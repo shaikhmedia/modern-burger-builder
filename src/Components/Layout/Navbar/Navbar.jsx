@@ -11,7 +11,7 @@ const navbar = (props) => {
       <a href="">
         <img className={Styles.Logo} src={Logo} alt="Burger-Builder" />
       </a>
-      <Hamburger />
+      <Hamburger sideDrawerOpen={props.openSideDrawer} />
       <NavigationItems />
     </div>
   );

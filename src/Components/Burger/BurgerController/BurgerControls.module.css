@@ -39,3 +39,27 @@
   color: rgba(0, 0, 0, 0.404);
   cursor: not-allowed;
 }
+
+@media (max-width: 649px) {
+  .Controls {
+    width: 100%;
+  }
+
+  .Button {
+    margin: 3px;
+  }
+
+  .Order {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 499px) {
+  .Controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
