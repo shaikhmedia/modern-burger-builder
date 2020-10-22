@@ -39,12 +39,13 @@
   }
 
   .SDItems li a:hover {
-    color: #f70157;
+    color: white;
   }
 
   .SDItems li a {
     color: black;
     text-decoration: none;
+    font-weight: 500;
   }
 
   .SDItems li:last-child {

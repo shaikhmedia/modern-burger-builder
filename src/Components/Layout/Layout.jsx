@@ -12,15 +12,18 @@ class Layout extends Component {
     sideDrawerShow: false,
   };
 
-  handleSideDrawerToggle = (prevState) => {
-    this.setState({ sideDrawerShow: prevState != this.state.sideDrawerShow });
+  handleSideDrawerToggle = () => {
+    this.setState({ sideDrawerShow: !this.state.sideDrawerShow });
   };
 
   render() {
     return (
       <React.Fragment>
         {/* SideDrawer */}
-        <SideDrawer SDStatus={this.state.sideDrawerShow}>
+        <SideDrawer
+          SDStatus={this.state.sideDrawerShow}
+          hide={this.handleSideDrawerToggle}
+        >
           <NavigationItems sideDrawerStatus={this.state.sideDrawerShow} />
         </SideDrawer>
 

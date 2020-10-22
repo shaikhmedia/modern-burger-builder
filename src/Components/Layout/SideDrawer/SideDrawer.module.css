@@ -6,22 +6,31 @@
   right: 0;
   top: 0;
   z-index: 2;
-  background-color: #dfdfdfef;
+  background-color: #ffffff;
   padding: 16px;
   box-sizing: border-box;
-  transition: transform 0.3s ease-out;
+  box-shadow: 3px 3px 15px rgba(114, 114, 114, 0.5);
+  transition: all 0.3s ease-out;
+  opacity: 1;
+  animation: show 0.2s;
+  transform: translateX(1);
+}
+
+@keyframes show {
+  from {
+    transform: translateX(1);
+    opacity: 0;
+    z-index: -1;
+  }
+  to {
+    transform: translateX(1);
+    opacity: 1;
+    z-index: 2;
+  }
 }
 
 @media (min-width: 500px) {
   .SideDrawer {
     display: none;
   }
-}
-
-.Open {
-  transform: translateX(0);
-}
-
-.Close {
-  transform: translateX(-100%);
 }

@@ -3,11 +3,11 @@ import Styles from "./SideDrawer.module.css";
 import Backdrop from "../Backdrop/Backdrop";
 
 const sideDrawer = (props) => {
-  if (props.sideDrawerStatus) {
+  if (props.SDStatus) {
     return (
       <Fragment>
         <div className={Styles.SideDrawer}>{props.children}</div>
-        <Backdrop hiden={props.SDStatus} />
+        <Backdrop hiden={props.hide} />
       </Fragment>
     );
   } else {
