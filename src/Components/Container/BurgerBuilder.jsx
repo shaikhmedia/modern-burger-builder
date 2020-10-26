@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Burger from "../Burger/Burger";
 import BurgerControls from "../Burger/BurgerController/BurgerControls";
 import Modal from "../Layout/Modal/Modal";
-// import Backdrop from "../Layout/Backdrop/Backdrop";
+import axios from "../../axios-orders";
 
 const pricing = {
   cheese: 0.5,
@@ -90,6 +90,38 @@ class BurgerBuilder extends Component {
     this.setState({ disableOrder: updatedPrice <= 4 });
   };
 
+  // Functionning Yes button on Modal
+  handleCheckoutYes = () => {
+    // Create an object to post on database
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: "Alamin Shaikh",
+        address: {
+          street: "Dorga Road, Gollamari",
+          thana: "Sonadanga",
+          district: "Khulna",
+          country: "Bangladesh",
+        },
+        email: "hello@test.com",
+        phone: 1234567890,
+      },
+      delivery: "fastest",
+    };
+
+    // Post the object as json on database
+    axios.post("/order.json", order);
+
+    // Remove the modal
+    this.handleHideModal();
+
+    // Show order completion alert after .5 second
+    setTimeout(() => {
+      alert("Thanks! Your burger is on the way");
+    }, 0.5);
+  };
+
   render() {
     // Copying the ingredient object
     const disableIngBtn = {
@@ -115,6 +147,7 @@ class BurgerBuilder extends Component {
           ingDisable={disableIngBtn}
         />
         <Modal
+          checkoutYes={this.handleCheckoutYes}
           hide={this.handleHideModal}
           show={this.state.showModal}
           price={this.state.totalPrice}
