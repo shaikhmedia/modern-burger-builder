@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import Burger from "../Burger/Burger";
 import BurgerControls from "../Burger/BurgerController/BurgerControls";
 import Modal from "../Layout/Modal/Modal";
+import Loader from "../Layout/Loader/Loader";
 import axios from "../../axios-orders";
+import OrderSummary from "../Layout/OrderSummary/OrderSummary";
+import orderSummary from "../Layout/OrderSummary/OrderSummary";
 
 const pricing = {
   cheese: 0.5,
@@ -23,6 +26,7 @@ class BurgerBuilder extends Component {
     totalPrice: 4,
     showModal: false,
     disableOrder: true,
+    loading: false,
   };
 
   // Add item in burger
@@ -92,6 +96,9 @@ class BurgerBuilder extends Component {
 
   // Functionning Yes button on Modal
   handleCheckoutYes = () => {
+    // Set the loading state true to show the loader
+    this.setState({ loading: true });
+
     // Create an object to post on database
     const order = {
       ingredients: this.state.ingredients,
@@ -111,15 +118,16 @@ class BurgerBuilder extends Component {
     };
 
     // Post the object as json on database
-    axios.post("/order.json", order);
-
-    // Remove the modal
-    this.handleHideModal();
-
-    // Show order completion alert after .5 second
-    setTimeout(() => {
-      alert("Thanks! Your burger is on the way");
-    }, 0.5);
+    axios
+      .post("/order.json", order)
+      .then((response) => {
+        // Remove the loader and the modal turning loading state and showModal state false when the order data is posted on server
+        this.setState({ loading: false, showModal: false });
+      })
+      .catch((error) => {
+        // Remove the loader and the modal turning loading state and showModal state false when there is an error
+        this.setState({ loading: false, showModal: false });
+      });
   };
 
   render() {
@@ -132,6 +140,21 @@ class BurgerBuilder extends Component {
     Object.keys(disableIngBtn).map((cur) => {
       disableIngBtn[cur] = disableIngBtn[cur] <= 0;
     });
+
+    // Put order summary component to a variable
+    let orderSummary = (
+      <OrderSummary
+        checkoutYes={this.handleCheckoutYes}
+        price={this.state.totalPrice}
+        Ing={this.state.ingredients}
+        hide={this.handleHideModal}
+      />
+    );
+
+    // Change order summary to loader if loading state is true
+    if (this.state.loading) {
+      orderSummary = <Loader />;
+    }
 
     return (
       // Return Burger, BurgerControl and Modal components to Layout
@@ -146,13 +169,9 @@ class BurgerBuilder extends Component {
           removeIngredient={this.handleRemoveIngredient}
           ingDisable={disableIngBtn}
         />
-        <Modal
-          checkoutYes={this.handleCheckoutYes}
-          hide={this.handleHideModal}
-          show={this.state.showModal}
-          price={this.state.totalPrice}
-          Ing={this.state.ingredients}
-        />
+        <Modal hide={this.handleHideModal} show={this.state.showModal}>
+          {orderSummary}
+        </Modal>
       </div>
     );
   }
