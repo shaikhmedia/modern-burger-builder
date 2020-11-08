@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Styles from "./OrderSummary.module.css";
+import Button from "../Button/Button";
 
 const orderSummary = (props) => {
   // convert and map the ingredients obj and return a list for each Ingredient
@@ -23,18 +24,12 @@ const orderSummary = (props) => {
       <h4 className={Styles.General}>Total Price: ${props.price.toFixed(2)}</h4>
       <p className={Styles.General}>Continue to checkout?</p>
       <div>
-        <button
-          onClick={props.checkoutYes}
-          className={`${Styles.Button} ${Styles.Yes}`}
-        >
-          Yes
-        </button>
-        <button
-          onClick={props.hide}
-          className={`${Styles.Button} ${Styles.Cancel}`}
-        >
+        <Button clicked={props.checkoutYes} btnType="Success">
+          Continue
+        </Button>
+        <Button clicked={props.hide} btnType="Danger">
           Cancel
-        </button>
+        </Button>
       </div>
     </Fragment>
   );

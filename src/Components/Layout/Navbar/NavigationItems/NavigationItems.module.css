@@ -7,10 +7,10 @@
   color: white;
   text-decoration: none;
   padding: 8px;
+  font-weight: 700;
 }
 
-.Items li a:hover,
-.Items li a.active {
+.Items li a:hover {
   color: coral;
 }
 
@@ -39,7 +39,7 @@
   }
 
   .SDItems li a:hover {
-    color: white;
+    color: coral;
   }
 
   .SDItems li a {

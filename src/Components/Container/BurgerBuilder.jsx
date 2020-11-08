@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Burger from "../Burger/Burger";
 import BurgerControls from "../Burger/BurgerController/BurgerControls";
 import Modal from "../Layout/Modal/Modal";
 import Loader from "../Layout/Loader/Loader";
 import axios from "../../axios-orders";
 import OrderSummary from "../Layout/OrderSummary/OrderSummary";
-import orderSummary from "../Layout/OrderSummary/OrderSummary";
+import { withRouter } from "react-router-dom";
 
 const pricing = {
   cheese: 0.5,
@@ -17,17 +17,24 @@ const pricing = {
 class BurgerBuilder extends Component {
   // Initial state
   state = {
-    ingredients: {
-      cheese: 0,
-      bacon: 0,
-      meat: 0,
-      salad: 0,
-    },
+    ingredients: null,
     totalPrice: 4,
     showModal: false,
     disableOrder: true,
     loading: false,
   };
+
+  // Fetch the ingredients from database
+  componentDidMount() {
+    axios
+      .get("https://burger-builder-41792.firebaseio.com/ingredients.json")
+      .then((response) => {
+        this.setState({ ingredients: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   // Add item in burger
   handleAddIngredient = (type) => {
@@ -96,38 +103,57 @@ class BurgerBuilder extends Component {
 
   // Functionning Yes button on Modal
   handleCheckoutYes = () => {
-    // Set the loading state true to show the loader
-    this.setState({ loading: true });
+    // // Set the loading state true to show the loader
+    // this.setState({ loading: true });
+    // // Create an object to post on database
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: "Alamin Shaikh",
+    //     address: {
+    //       street: "Dorga Road, Gollamari",
+    //       thana: "Sonadanga",
+    //       district: "Khulna",
+    //       country: "Bangladesh",
+    //     },
+    //     email: "hello@test.com",
+    //     phone: 1234567890,
+    //   },
+    //   delivery: "fastest",
+    // };
+    // // Post the object as json on database
+    // axios
+    //   .post("/order.json", order)
+    //   .then((response) => {
+    //     // Remove the loader and the modal turning loading state and showModal state false when the order data is posted on server
+    //     this.setState({ loading: false, showModal: false });
+    //   })
+    //   .catch((error) => {
+    //     // Remove the loader and the modal turning loading state and showModal state false when there is an error
+    //     this.setState({ loading: false, showModal: false });
+    //   });
 
-    // Create an object to post on database
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: "Alamin Shaikh",
-        address: {
-          street: "Dorga Road, Gollamari",
-          thana: "Sonadanga",
-          district: "Khulna",
-          country: "Bangladesh",
-        },
-        email: "hello@test.com",
-        phone: 1234567890,
-      },
-      delivery: "fastest",
-    };
+    // Initiating an empty array
+    const queryParams = [];
 
-    // Post the object as json on database
-    axios
-      .post("/order.json", order)
-      .then((response) => {
-        // Remove the loader and the modal turning loading state and showModal state false when the order data is posted on server
-        this.setState({ loading: false, showModal: false });
-      })
-      .catch((error) => {
-        // Remove the loader and the modal turning loading state and showModal state false when there is an error
-        this.setState({ loading: false, showModal: false });
-      });
+    // Looping through ingredients object and pushing the keys = values to queryParams array
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        `${encodeURIComponent(i)}=${encodeURIComponent(
+          this.state.ingredients[i]
+        )}`
+      );
+    }
+
+    // Making the array an string joining with &
+    const queryString = queryParams.join("&");
+
+    // Pushing a new page to the stack with queryString as search
+    this.props.history.push({
+      pathname: "/checkout",
+      search: `?${queryString}`,
+    });
   };
 
   render() {
@@ -141,34 +167,51 @@ class BurgerBuilder extends Component {
       disableIngBtn[cur] = disableIngBtn[cur] <= 0;
     });
 
-    // Put order summary component to a variable
-    let orderSummary = (
-      <OrderSummary
-        checkoutYes={this.handleCheckoutYes}
-        price={this.state.totalPrice}
-        Ing={this.state.ingredients}
-        hide={this.handleHideModal}
-      />
-    );
+    // Set orderSummary and burgerandController to null initially
+    let orderSummary = null;
+    let burgerAndController = null;
 
-    // Change order summary to loader if loading state is true
-    if (this.state.loading) {
-      orderSummary = <Loader />;
+    // Return burger, controller and orderSummary components if ingredients are loaded from server, else show the loader in place of the burger and controller
+    if (this.state.ingredients) {
+      burgerAndController = (
+        <Fragment>
+          <Burger ingredients={this.state.ingredients} />
+          <BurgerControls
+            orderDisable={this.state.disableOrder}
+            showModal={this.handleShowModal}
+            ingredients={this.state.ingredients}
+            price={this.state.totalPrice}
+            addIngredient={this.handleAddIngredient}
+            removeIngredient={this.handleRemoveIngredient}
+            ingDisable={disableIngBtn}
+          />
+        </Fragment>
+      );
+
+      orderSummary = (
+        <OrderSummary
+          checkoutYes={this.handleCheckoutYes}
+          price={this.state.totalPrice}
+          Ing={this.state.ingredients}
+          hide={this.handleHideModal}
+        />
+      );
+
+      // Change order summary to loader if loading state is true
+      if (this.state.loading) {
+        orderSummary = <Loader />;
+      }
+    } else {
+      burgerAndController = <Loader />;
     }
 
     return (
       // Return Burger, BurgerControl and Modal components to Layout
       <div>
-        <Burger ingredients={this.state.ingredients} />
-        <BurgerControls
-          orderDisable={this.state.disableOrder}
-          showModal={this.handleShowModal}
-          ingredients={this.state.ingredients}
-          price={this.state.totalPrice}
-          addIngredient={this.handleAddIngredient}
-          removeIngredient={this.handleRemoveIngredient}
-          ingDisable={disableIngBtn}
-        />
+        {/* Burger and controller components */}
+        {burgerAndController}
+
+        {/* Modal component with children */}
         <Modal hide={this.handleHideModal} show={this.state.showModal}>
           {orderSummary}
         </Modal>
@@ -177,4 +220,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+export default withRouter(BurgerBuilder);

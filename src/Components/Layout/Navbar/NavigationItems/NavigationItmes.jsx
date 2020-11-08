@@ -1,5 +1,6 @@
 import React from "react";
 import Styles from "./NavigationItems.module.css";
+import { Link } from "react-router-dom";
 
 const navigationItems = (props) => {
   let classes = [Styles.Items];
@@ -9,12 +10,14 @@ const navigationItems = (props) => {
   return (
     <ul className={classes.join(" ")}>
       <li>
-        <a href="">Order Summary</a>
+        <Link to="/checkout" href="">
+          Order Summary
+        </Link>
       </li>
       <li>
-        <a className={Styles.active} href="">
-          Home
-        </a>
+        <Link to="/" className={Styles.active} href="">
+          Burger Builder
+        </Link>
       </li>
     </ul>
   );
