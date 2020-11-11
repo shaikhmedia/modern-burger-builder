@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 const summaryPage = (props) => {
   return (
     <div>
-      <h1>Hope you enjoy your burger!</h1>
+      <h2>Hope you enjoy your burger!</h2>
 
       <Burger ingredients={props.ingredients} />
 

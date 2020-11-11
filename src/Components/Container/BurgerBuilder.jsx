@@ -5,7 +5,6 @@ import Modal from "../Layout/Modal/Modal";
 import Loader from "../Layout/Loader/Loader";
 import axios from "../../axios-orders";
 import OrderSummary from "../Layout/OrderSummary/OrderSummary";
-import { withRouter } from "react-router-dom";
 
 const pricing = {
   cheese: 0.5,
@@ -103,56 +102,29 @@ class BurgerBuilder extends Component {
 
   // Functionning Yes button on Modal
   handleCheckoutYes = () => {
-    // // Set the loading state true to show the loader
-    // this.setState({ loading: true });
-    // // Create an object to post on database
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: "Alamin Shaikh",
-    //     address: {
-    //       street: "Dorga Road, Gollamari",
-    //       thana: "Sonadanga",
-    //       district: "Khulna",
-    //       country: "Bangladesh",
-    //     },
-    //     email: "hello@test.com",
-    //     phone: 1234567890,
-    //   },
-    //   delivery: "fastest",
-    // };
-    // // Post the object as json on database
-    // axios
-    //   .post("/order.json", order)
-    //   .then((response) => {
-    //     // Remove the loader and the modal turning loading state and showModal state false when the order data is posted on server
-    //     this.setState({ loading: false, showModal: false });
-    //   })
-    //   .catch((error) => {
-    //     // Remove the loader and the modal turning loading state and showModal state false when there is an error
-    //     this.setState({ loading: false, showModal: false });
-    //   });
-
     // Initiating an empty array
     const queryParams = [];
 
     // Looping through ingredients object and pushing the keys = values to queryParams array
-    for (let i in this.state.ingredients) {
+    for (let ing in this.state.ingredients) {
       queryParams.push(
-        `${encodeURIComponent(i)}=${encodeURIComponent(
-          this.state.ingredients[i]
+        // ['bacon=0', 'cheese=0', 'meat=0', 'salad=0']
+        `${encodeURIComponent(ing)}=${encodeURIComponent(
+          this.state.ingredients[ing]
         )}`
       );
     }
 
+    // Push the totalPrice to queryParams array
+    queryParams.push(`price=${this.state.totalPrice}`);
+
     // Making the array an string joining with &
     const queryString = queryParams.join("&");
 
-    // Pushing a new page to the stack with queryString as search
+    // Pushing a new page to the stack with queryString as search to parse the data on checkout page
     this.props.history.push({
       pathname: "/checkout",
-      search: `?${queryString}`,
+      search: "?" + queryString,
     });
   };
 
@@ -220,4 +192,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default withRouter(BurgerBuilder);
+export default BurgerBuilder;

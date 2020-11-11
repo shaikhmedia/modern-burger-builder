@@ -1,70 +1,80 @@
 import React, { Component } from "react";
 import SummaryPage from "../../Layout/SummaryPage/SummaryPage";
-import Navbar from "../../Layout/Navbar/Navbar";
-import Footer from "../../Layout/Footer/Footer";
-import SideDrawer from "../../Layout/SideDrawer/SideDrawer";
-import NavigationItems from "../../Layout/Navbar/NavigationItems/NavigationItmes";
+import { Route } from "react-router-dom";
+import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
   state = {
-    ingredients: {},
-    loading: false,
-    sideDrawerShow: false,
+    ingredients: {
+      cheese: 1,
+      bacon: 1,
+      meat: 1,
+      salad: 1,
+    },
+    price: 0,
   };
 
   // Parse the query Params when the component is mounted
-  componentDidMount() {
-    // Getting the query
+  componentWillMount() {
+    // Getting the queryParam String
     const query = new URLSearchParams(this.props.location.search);
-    console.log(query);
 
     // Ingredients as an empty object
-    const ingredients = {};
+    let ingredients = {};
+    let price = 0;
 
     // Looping through the qery entries and setting ingredient's value and key to the object
+    // query.entries() = {['bacon', '0'], ['cheese', '0'], ['meat', '0'], ['salad', '0'], ['price', '0']}
     for (let param of query.entries()) {
-      ingredients[param[0]] = +param[1];
+      if (param[0] === "price") {
+        price = param[1];
+      } else {
+        ingredients[param[0]] = +param[1];
+      }
     }
 
     // Updating the state
-    this.setState({ ingredients: ingredients });
+    this.setState({ ingredients: ingredients, price: price });
   }
-
-  // Toggle Side Drawer
-  handleSideDrawerToggle = () => {
-    this.setState({ sideDrawerShow: !this.state.sideDrawerShow });
-  };
 
   // Cancel checkout and go back to builder
   checkoutCancelledHandler = () => {
     this.props.history.goBack();
   };
 
-  checkoutContinuedHandler = () => {};
+  checkoutContinuedHandler = () => {
+    this.props.history.replace("/checkout/contact-data");
+  };
 
   render() {
     return (
       <div>
-        {/* SideDrawer */}
-        <SideDrawer
-          SDStatus={this.state.sideDrawerShow}
-          hide={this.handleSideDrawerToggle}
-        >
-          <NavigationItems sideDrawerStatus={this.state.sideDrawerShow} />
-        </SideDrawer>
-
-        {/* NavBar */}
-        <Navbar openSideDrawer={this.handleSideDrawerToggle} />
-
         {/* SummaryPage */}
-        <SummaryPage
-          ingredients={this.state.ingredients}
-          checkoutCancelled={this.checkoutCancelledHandler}
-          checkoutContinued={this.checkoutContinuedHandler}
+        <Route
+          path="/checkout"
+          exact
+          render={(props) => (
+            <SummaryPage
+              ingredients={this.state.ingredients}
+              checkoutCancelled={this.checkoutCancelledHandler}
+              checkoutContinued={this.checkoutContinuedHandler}
+              {...props}
+            />
+          )}
         />
 
-        {/* Footer */}
-        <Footer />
+        {/* ContactData */}
+        <Route
+          path={this.props.match.path + "/contact-data"}
+          exact
+          render={(props) => (
+            <ContactData
+              ingredients={this.state.ingredients}
+              price={this.state.price}
+              {...props}
+            />
+          )}
+        />
       </div>
     );
   }

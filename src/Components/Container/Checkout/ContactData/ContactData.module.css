@@ -1,0 +1,30 @@
+.ContactData {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.ContactData h4 {
+  padding-bottom: 10px;
+  color: slategrey;
+}
+
+.ContactData form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ContactData input {
+  width: 50%;
+  display: block;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 4px;
+}

@@ -3,7 +3,6 @@ import BurgerBuilder from "../Container/BurgerBuilder";
 import Navbar from "./Navbar/Navbar";
 import SideDrawer from "../Layout/SideDrawer/SideDrawer";
 import Footer from "../Layout/Footer/Footer";
-import EnvironmentalConcerns from "../Layout/EnvironmentalConcerns/EnvironmentalConcerns";
 import NavigationItems from "../Layout/Navbar/NavigationItems/NavigationItmes";
 
 // Layout of the App
@@ -30,10 +29,8 @@ class Layout extends Component {
         {/* Navbar */}
         <Navbar openSideDrawer={this.handleSideDrawerToggle} />
 
-        {/* Builder */}
-        <BurgerBuilder />
-
-        <EnvironmentalConcerns />
+        {/* Any component goes here as children */}
+        {this.props.children}
 
         {/* Footer */}
         <Footer />
