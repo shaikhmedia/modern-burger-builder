@@ -1,0 +1,29 @@
+.Order {
+  display: block;
+  text-align: left;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px rgba(128, 128, 128, 0.575);
+}
+
+.Ing {
+  text-transform: capitalize;
+  display: flex;
+  margin: 5px;
+  margin-left: 30px;
+  padding: 2px 5px;
+  font-weight: 400;
+}
+
+.Color {
+  color: rgb(255, 98, 81);
+}
+
+.Order p {
+  font-weight: 500;
+}
+
+.Line {
+  margin: 10px 0px;
+}

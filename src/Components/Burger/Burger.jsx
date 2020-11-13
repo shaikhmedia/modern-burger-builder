@@ -13,7 +13,24 @@ const burger = (props) => {
       return acc.concat(cur);
     }, []);
 
-  //console.log(updatedIngredients);
+  // console.log(updatedIngredients);
+
+  // console.log(props.ingredients);
+
+  // const newIng = Object.entries(props.ingredients);
+
+  // // Total amount of ingredients
+  // const totalAmount = newIng
+  //   .map((el) => el[1])
+  //   .reduce((acc, cur) => {
+  //     return acc + cur;
+  //   });
+
+  // let updatedIng = newIng.map((el) => {
+  //   console.log([...Array(el[1])]);
+  // });
+
+  // console.log(updatedIng);
 
   if (updatedIngredients.length === 0) {
     updatedIngredients = <p className={Styles.Ing}>Please add ingredients</p>;

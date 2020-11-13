@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import BurgerBuilder from "../Container/BurgerBuilder";
 import Navbar from "./Navbar/Navbar";
 import SideDrawer from "../Layout/SideDrawer/SideDrawer";
 import Footer from "../Layout/Footer/Footer";
@@ -23,7 +22,10 @@ class Layout extends Component {
           SDStatus={this.state.sideDrawerShow}
           hide={this.handleSideDrawerToggle}
         >
-          <NavigationItems sideDrawerStatus={this.state.sideDrawerShow} />
+          <NavigationItems
+            hideSideDrawer={this.handleSideDrawerToggle}
+            sideDrawerStatus={this.state.sideDrawerShow}
+          />
         </SideDrawer>
 
         {/* Navbar */}

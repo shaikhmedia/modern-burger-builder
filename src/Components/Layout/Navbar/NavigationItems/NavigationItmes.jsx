@@ -9,12 +9,12 @@ const navigationItems = (props) => {
   }
   return (
     <ul className={classes.join(" ")}>
-      <li>
-        <Link to="/checkout" href="">
-          Order Summary
+      <li onClick={props.hideSideDrawer}>
+        <Link to="/orders" href="">
+          Orders
         </Link>
       </li>
-      <li>
+      <li onClick={props.hideSideDrawer}>
         <Link to="/" className={Styles.active} href="">
           Burger Builder
         </Link>
