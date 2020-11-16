@@ -1,7 +1,9 @@
 .Order {
   display: block;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  width: 70%;
   text-align: left;
-  margin: 10px;
   padding: 10px;
   border-radius: 4px;
   box-shadow: 2px 2px 8px rgba(128, 128, 128, 0.575);

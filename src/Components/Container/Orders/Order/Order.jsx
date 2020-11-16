@@ -26,9 +26,7 @@ const Order = (props) => {
   return (
     <div className={Styles.Order}>
       <p className={Styles.Color}>Customer's Details</p> {customerData}
-      <hr className={Styles.Line} />
       <p className={Styles.Color}>Ingredients:</p> {ingOutput}
-      <hr className={Styles.Line} />
       <p>
         Price: <span className={Styles.Color}>${props.price}</span>{" "}
       </p>

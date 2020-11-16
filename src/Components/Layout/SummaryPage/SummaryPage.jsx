@@ -1,10 +1,11 @@
 import React from "react";
 import Burger from "../../Burger/Burger";
 import Button from "../Button/Button";
+import Styles from "./SummaryPage.module.css";
 
 const summaryPage = (props) => {
   return (
-    <div>
+    <div className={Styles.SummaryPage}>
       <h2>Hope you enjoy your burger!</h2>
 
       <Burger ingredients={props.ingredients} />

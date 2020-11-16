@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Button from "../../../Layout/Button/Button";
-import Styles from "./ContactData.module.css";
 import axios from "../../../../axios-orders";
 import Loader from "../../../Layout/Loader/Loader";
+import Form from "../../../Layout/Form/Form";
 
 class ContactData extends Component {
   state = {
@@ -64,45 +63,23 @@ class ContactData extends Component {
       form = <Loader />;
     } else {
       form = (
-        <React.Fragment>
-          <h4>Please enter your contact details!</h4>
-          <form onSubmit={this.handleOrderSubmit}>
-            <input
-              type="text"
-              name="name"
-              value={this.state.customer.name}
-              onChange={this.handleInputChange}
-              placeholder="Your name"
-            />
-            <input
-              type="text"
-              name="email"
-              value={this.state.customer.email}
-              onChange={this.handleInputChange}
-              placeholder="Your email"
-            />
-            <input
-              type="text"
-              name="street"
-              placeholder="Street Addres"
-              value={this.state.customer.street}
-              onChange={this.handleInputChange}
-            />
-            <input
-              type="number"
-              name="postCode"
-              value={this.state.customer.postCode}
-              onChange={this.handleInputChange}
-              placeholder="Post code"
-            />
-            <Button clicled={this.handleOrderSubmit} btnType="Success">
-              ORDER NOW
-            </Button>
-          </form>
-        </React.Fragment>
+        <Form
+          submitted={this.handleOrderSubmit}
+          name={this.state.customer.name}
+          email={this.state.customer.email}
+          street={this.state.customer.street}
+          postCode={this.state.customer.postCode}
+          changed={this.handleInputChange}
+          clicked={this.handleOrderSubmit}
+        />
       );
     }
-    return <div className={Styles.ContactData}>{form}</div>;
+    return (
+      <div>
+        <p>Please enter your contact data 🙂 </p>
+        {form}
+      </div>
+    );
   }
 }
 
