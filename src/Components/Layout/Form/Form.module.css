@@ -1,16 +1,15 @@
 .Form {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px 0px 20px 0px;
+  margin: 20px 0px;
 }
 
-.Form input {
-  margin: 5px;
-  padding: 8px 10px;
-  outline: none;
-  border: 1px solid grey;
-  border-radius: 4px;
+.Title {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
   width: 40vw;
   max-width: 300px;
+  margin: 0px auto;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: rgb(255, 98, 81);
 }

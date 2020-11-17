@@ -9,14 +9,16 @@ class ContactData extends Component {
     customer: {
       name: "",
       email: "",
+      password: "",
       street: "",
-      postCode: "",
+      ZIP: "",
     },
   };
 
   handleInputChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+
     this.setState({
       customer: {
         ...this.state.customer,
@@ -63,23 +65,21 @@ class ContactData extends Component {
       form = <Loader />;
     } else {
       form = (
-        <Form
-          submitted={this.handleOrderSubmit}
-          name={this.state.customer.name}
-          email={this.state.customer.email}
-          street={this.state.customer.street}
-          postCode={this.state.customer.postCode}
-          changed={this.handleInputChange}
-          clicked={this.handleOrderSubmit}
-        />
+        <div>
+          <Form
+            submitted={this.handleOrderSubmit}
+            name={this.state.customer.name}
+            email={this.state.customer.email}
+            street={this.state.customer.street}
+            postCode={this.state.customer.postCode}
+            changed={this.handleInputChange}
+            clicked={this.handleOrderSubmit}
+            customerData={this.state.customer}
+          />
+        </div>
       );
     }
-    return (
-      <div>
-        <p>Please enter your contact data 🙂 </p>
-        {form}
-      </div>
-    );
+    return <div>{form}</div>;
   }
 }
 
