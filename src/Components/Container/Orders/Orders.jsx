@@ -30,7 +30,7 @@ class Orders extends Component {
             key={order.id}
             price={Number.parseFloat(order.price).toFixed(2)}
             ingredients={{ ...order.ingredients }}
-            customers={order.customer}
+            customers={{ ...order.customer }}
             deliver={order.delivery}
           />
         ))}
