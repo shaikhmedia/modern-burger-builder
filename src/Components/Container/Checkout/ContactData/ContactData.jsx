@@ -34,6 +34,8 @@ class ContactData extends Component {
       loading: true,
     });
 
+    console.log(this.props.ingredients);
+
     // Create an object to post on database
     const order = {
       ingredients: this.props.ingredients,

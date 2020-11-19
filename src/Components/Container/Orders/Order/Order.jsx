@@ -2,7 +2,6 @@ import React from "react";
 import Styles from "./Order.module.css";
 
 const Order = (props) => {
-  console.log(props.ingredients);
   const ingArry = Object.entries(props.ingredients);
 
   const ingOutput = ingArry.map((ing) => {

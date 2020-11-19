@@ -54,7 +54,6 @@ const input = (props) => {
         value={value}
         onChange={props.changed}
         placeholder={placeholder}
-        required
       />
       <small>{validationText}</small>
     </div>

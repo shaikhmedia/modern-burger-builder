@@ -1,4 +1,6 @@
 .Button {
+  width: 8rem;
+  height: 2.5rem;
   border: 0;
   margin: 5px;
   padding: 6px 13px;
@@ -21,6 +23,7 @@
 
 .Button:disabled {
   cursor: not-allowed;
+  background-color: rgb(224, 224, 224);
 }
 
 .Success {

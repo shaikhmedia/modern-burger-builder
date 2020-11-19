@@ -69,7 +69,7 @@ class Checkout extends Component {
           exact
           render={(props) => (
             <ContactData
-              ingredients={this.state.ingredients}
+              ingredients={{ ...this.state.ingredients }}
               price={this.state.price}
               {...props}
             />

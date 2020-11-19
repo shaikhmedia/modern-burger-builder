@@ -3,36 +3,27 @@ import Ingredients from "./Ingredients/Ingredients";
 import Styles from "../Burger/Burger.module.css";
 
 const burger = (props) => {
-  let updatedIngredients = Object.keys(props.ingredients)
-    .map((el) => {
-      return [...Array(props.ingredients[el])].map((_, i) => {
-        return <Ingredients key={el + i} type={el} />;
-      });
-    })
+  // Convert ingredients object to array
+  const ingArray = Object.entries(props.ingredients);
+
+  // Loop through the array
+  let updatedIngredients = ingArray.map((el) => {
+    // Construct and return a new array with value and map through it
+    return [...Array(el[1])].map((cur, i) => {
+      // Return Ingredients component for each value and it's name
+      return <Ingredients key={el[0] + i} type={el[0]} />;
+    });
+  });
+
+  // Find the total number of ingredients
+  const totalIngAmount = ingArray
+    .map((ing) => ing[1])
     .reduce((acc, cur) => {
-      return acc.concat(cur);
-    }, []);
+      return cur + acc;
+    }, 0);
 
-  // console.log(updatedIngredients);
-
-  // console.log(props.ingredients);
-
-  // const newIng = Object.entries(props.ingredients);
-
-  // // Total amount of ingredients
-  // const totalAmount = newIng
-  //   .map((el) => el[1])
-  //   .reduce((acc, cur) => {
-  //     return acc + cur;
-  //   });
-
-  // let updatedIng = newIng.map((el) => {
-  //   console.log([...Array(el[1])]);
-  // });
-
-  // console.log(updatedIng);
-
-  if (updatedIngredients.length === 0) {
+  // Set paragraph if there is no ingredients
+  if (totalIngAmount === 0) {
     updatedIngredients = <p className={Styles.Ing}>Please add ingredients</p>;
   }
 
