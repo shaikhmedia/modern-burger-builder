@@ -4,6 +4,7 @@ import Styles from "./Button.module.css";
 const button = (props) => {
   return (
     <button
+      style={props.style}
       disabled={props.disabled}
       onSubmit={props.submited}
       onClick={props.clicked}
