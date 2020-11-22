@@ -35,6 +35,10 @@ const Order = (props) => {
       <p>
         Price: <span className={Styles.Color}>${props.price}</span>{" "}
       </p>
+      <p>
+        Dilivery Method:
+        <span className={Styles.Color}> {props.delivery}</span>
+      </p>
       <Button
         style={{
           height: "2rem",

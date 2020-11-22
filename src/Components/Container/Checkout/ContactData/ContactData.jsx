@@ -13,18 +13,29 @@ class ContactData extends Component {
       street: "",
       ZIP: "",
     },
+    delivery: "",
   };
 
+  // Handle the change on input
   handleInputChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
+    // Get customer object from state and set key value according to target's name and value
     this.setState({
       customer: {
         ...this.state.customer,
         [name]: value,
       },
     });
+  };
+
+  // Get choosen deliver method and set to state
+  handleDeliveryMethod = (e) => {
+    const value = e.target.value;
+
+    // Update the state
+    this.setState({ delivery: value });
   };
 
   handleOrderSubmit = (e) => {
@@ -34,14 +45,18 @@ class ContactData extends Component {
       loading: true,
     });
 
-    console.log(this.props.ingredients);
+    let totalPrice = parseFloat(this.props.price);
+
+    if (this.state.delivery === "fastest") {
+      totalPrice += 2;
+    }
 
     // Create an object to post on database
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.price,
+      price: totalPrice,
       customer: this.state.customer,
-      delivery: "fastest",
+      delivery: this.state.delivery,
     };
 
     // Post the object as json on database
@@ -77,6 +92,7 @@ class ContactData extends Component {
             changed={this.handleInputChange}
             clicked={this.handleOrderSubmit}
             customerData={this.state.customer}
+            deliveryMethod={this.handleDeliveryMethod}
           />
         </div>
       );

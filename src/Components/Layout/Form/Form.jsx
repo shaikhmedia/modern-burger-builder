@@ -32,6 +32,28 @@ const form = (props) => {
       {/* Input Fields */}
       {inputFields}
 
+      <div className={Styles.Options}>
+        <input
+          onClick={props.deliveryMethod}
+          type="radio"
+          name="radio"
+          id="fastest"
+          value="fastest"
+        />
+        <label htmlFor="fastest">Fastest</label>
+
+        <input
+          onClick={props.deliveryMethod}
+          type="radio"
+          name="radio"
+          id="cheapest"
+          value="cheapest"
+        />
+        <label htmlFor="cheapest">Cheapest</label>
+      </div>
+      <small className={Styles.Delivery}>
+        (Select Fastest and get the delivery in 20 minutes only for $2 extra)
+      </small>
       {/* Order Now Button */}
       <Button
         disabled={disabled}

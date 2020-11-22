@@ -2,14 +2,38 @@
   margin: 20px 0px;
 }
 
+.Delivery {
+  display: block;
+  text-align: left;
+  width: 40vw;
+  margin: 0 auto;
+  font-size: 0.6rem;
+  color: rgb(255, 98, 81);
+  margin-bottom: 10px;
+}
+
 .Title {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   width: 40vw;
   max-width: 300px;
-  margin: 0px auto;
+  margin: 0 auto;
   font-weight: 500;
   font-size: 1.4rem;
   color: rgb(255, 98, 81);
+}
+
+.Options {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 40vw;
+  max-width: 300px;
+  margin: 10px auto;
+  font-size: 0.9rem;
+}
+
+.Options label {
+  padding: 0px 5px;
 }

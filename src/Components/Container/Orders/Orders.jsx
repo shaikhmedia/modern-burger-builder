@@ -16,10 +16,12 @@ class Orders extends Component {
     axios.get("/order.json").then((res) => {
       const orders = [];
 
+      // Loop through results data and push an object of orders and id in orders array
       for (let key in res.data) {
         orders.push({ ...res.data[key], id: key });
       }
 
+      // Update the state
       this.setState({ orders: orders, loading: false });
     });
   }
@@ -33,10 +35,13 @@ class Orders extends Component {
       return order.id !== id;
     });
 
+    // Spread the array of objects in the objects
     const orderObject = { ...updatedOrders };
 
+    // Update the state with udpated orders
     this.setState({ orders: updatedOrders });
 
+    // Update on server
     axios.put("/order.json", orderObject);
   };
 
@@ -51,7 +56,7 @@ class Orders extends Component {
             price={Number.parseFloat(order.price).toFixed(2)}
             ingredients={{ ...order.ingredients }}
             customers={{ ...order.customer }}
-            deliver={order.delivery}
+            delivery={order.delivery}
           />
         ))}
       </div>

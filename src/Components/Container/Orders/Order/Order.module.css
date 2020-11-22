@@ -20,12 +20,10 @@
 
 .Color {
   color: rgb(255, 98, 81);
+  text-transform: capitalize;
 }
 
 .Order p {
   font-weight: 500;
-}
-
-.Line {
-  margin: 10px 0px;
+  margin: 10px;
 }
