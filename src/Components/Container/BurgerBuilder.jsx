@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from "react";
+import axios from "../../axios-orders";
+import { connect } from "react-redux";
+
 import Burger from "../Burger/Burger";
 import BurgerControls from "../Burger/BurgerController/BurgerControls";
 import Modal from "../Layout/Modal/Modal";
 import Loader from "../Layout/Loader/Loader";
-import axios from "../../axios-orders";
 import OrderSummary from "../Layout/OrderSummary/OrderSummary";
+import * as actionTypes from "../../store/actions";
 
 const pricing = {
   cheese: 0.5,
@@ -16,7 +19,6 @@ const pricing = {
 class BurgerBuilder extends Component {
   // Initial state
   state = {
-    ingredients: null,
     totalPrice: 4,
     showModal: false,
     disableOrder: true,
@@ -25,14 +27,14 @@ class BurgerBuilder extends Component {
 
   // Fetch the ingredients from database
   componentDidMount() {
-    axios
-      .get("https://burger-builder-41792.firebaseio.com/ingredients.json")
-      .then((response) => {
-        this.setState({ ingredients: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .get("https://burger-builder-41792.firebaseio.com/ingredients.json")
+    //   .then((response) => {
+    //     this.setState({ ingredients: response.data });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }
 
   // Add item in burger
@@ -131,7 +133,7 @@ class BurgerBuilder extends Component {
   render() {
     // Copying the ingredient object
     const disableIngBtn = {
-      ...this.state.ingredients,
+      ...this.props.ings,
     };
 
     // Convert the object to array and map through to change the value of the items either true or false
@@ -144,17 +146,17 @@ class BurgerBuilder extends Component {
     let burgerAndController = null;
 
     // Return burger, controller and orderSummary components if ingredients are loaded from server, else show the loader in place of the burger and controller
-    if (this.state.ingredients) {
+    if (this.props.ings) {
       burgerAndController = (
         <Fragment>
-          <Burger ingredients={this.state.ingredients} />
+          <Burger ingredients={this.props.ings} />
           <BurgerControls
             orderDisable={this.state.disableOrder}
             showModal={this.handleShowModal}
-            ingredients={this.state.ingredients}
+            ingredients={this.props.ings}
             price={this.state.totalPrice}
-            addIngredient={this.handleAddIngredient}
-            removeIngredient={this.handleRemoveIngredient}
+            addIngredient={this.props.addIng}
+            removeIngredient={this.props.removeIng}
             ingDisable={disableIngBtn}
           />
         </Fragment>
@@ -164,7 +166,7 @@ class BurgerBuilder extends Component {
         <OrderSummary
           checkoutYes={this.handleCheckoutYes}
           price={this.state.totalPrice}
-          Ing={this.state.ingredients}
+          Ing={this.props.ings}
           hide={this.handleHideModal}
         />
       );
@@ -192,4 +194,19 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+const mapStateToProps = (state) => {
+  return {
+    ings: state.ingredients,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addIng: (ingName) =>
+      dispatch({ type: actionTypes.ADD_INGREDIENT, ingName: ingName }),
+    removeIng: (ingName) =>
+      dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingName: ingName }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);

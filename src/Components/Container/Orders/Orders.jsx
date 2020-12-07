@@ -35,14 +35,11 @@ class Orders extends Component {
       return order.id !== id;
     });
 
-    // Spread the array of objects in the objects
-    const orderObject = { ...updatedOrders };
-
     // Update the state with udpated orders
     this.setState({ orders: updatedOrders });
 
-    // Update on server
-    axios.put("/order.json", orderObject);
+    // ToDo
+    // Remove from server as well
   };
 
   render() {
