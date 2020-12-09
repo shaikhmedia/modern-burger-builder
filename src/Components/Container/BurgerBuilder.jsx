@@ -9,19 +9,10 @@ import Loader from "../Layout/Loader/Loader";
 import OrderSummary from "../Layout/OrderSummary/OrderSummary";
 import * as actionTypes from "../../store/actions";
 
-const pricing = {
-  cheese: 0.5,
-  bacon: 0.7,
-  meat: 1.3,
-  salad: 0.4,
-};
-
 class BurgerBuilder extends Component {
   // Initial state
   state = {
-    totalPrice: 4,
     showModal: false,
-    disableOrder: true,
     loading: false,
   };
 
@@ -37,56 +28,6 @@ class BurgerBuilder extends Component {
     //   });
   }
 
-  // Add item in burger
-  handleAddIngredient = (type) => {
-    // Increase the value of the items by 1
-    const increaseAmount = this.state.ingredients[type] + 1;
-    // Create a new ingredient object spreading the initial state array
-    const ingredients = {
-      ...this.state.ingredients,
-    };
-
-    // Set the value of the items in object to the updated value
-    ingredients[type] = increaseAmount;
-
-    const addedPrice = pricing[type];
-    const updatedPrice = this.state.totalPrice + addedPrice;
-
-    // Update the state with updaged ingredients object and total price
-    this.setState({
-      ingredients: ingredients,
-      totalPrice: updatedPrice,
-    });
-
-    // Pass the updated price to update orderDisable state
-    this.handleDisableOrder(updatedPrice);
-  };
-
-  // Remove item from burger
-  handleRemoveIngredient = (type) => {
-    // Return this function if the value of items in ingredients object is 0
-    if (this.state.ingredients[type] === 0) {
-      return;
-    }
-    // Decrease the value of the items by 1
-    const decreaseAmount = this.state.ingredients[type] - 1;
-    // Create a new ingredient object spreading the initial state array
-    const ingredients = {
-      ...this.state.ingredients,
-    };
-    // Set the value of the items in object to the updated value
-    ingredients[type] = decreaseAmount;
-
-    const price = this.state.totalPrice;
-    const updatedPrice = price - pricing[type];
-
-    // Update the state with updaged ingredients object and total price
-    this.setState({ ingredients: ingredients, totalPrice: updatedPrice });
-
-    // Pass the updated price to update orderDisable state
-    this.handleDisableOrder(updatedPrice);
-  };
-
   // Show the modal and backdrop
   handleShowModal = () => {
     this.setState({ showModal: true });
@@ -95,11 +36,6 @@ class BurgerBuilder extends Component {
   // Hide the modal and backdrop
   handleHideModal = () => {
     this.setState({ showModal: false });
-  };
-
-  // Disable order button if the total price is less than or equal to 4
-  handleDisableOrder = (updatedPrice) => {
-    this.setState({ disableOrder: updatedPrice <= 4 });
   };
 
   // Functionning Yes button on Modal
@@ -118,7 +54,7 @@ class BurgerBuilder extends Component {
     }
 
     // Push the totalPrice to queryParams array
-    queryParams.push(`price=${this.state.totalPrice}`);
+    queryParams.push(`price=${this.props.price}`);
 
     // Making the array an string joining with &
     const queryString = queryParams.join("&");
@@ -128,6 +64,11 @@ class BurgerBuilder extends Component {
       pathname: "/checkout",
       search: "?" + queryString,
     });
+  };
+
+  // Return true or false based on the price
+  handleDisableOrder = () => {
+    return this.props.price <= 4 ? true : false;
   };
 
   render() {
@@ -151,10 +92,10 @@ class BurgerBuilder extends Component {
         <Fragment>
           <Burger ingredients={this.props.ings} />
           <BurgerControls
-            orderDisable={this.state.disableOrder}
+            orderDisable={this.handleDisableOrder()}
             showModal={this.handleShowModal}
             ingredients={this.props.ings}
-            price={this.state.totalPrice}
+            price={this.props.price}
             addIngredient={this.props.addIng}
             removeIngredient={this.props.removeIng}
             ingDisable={disableIngBtn}
@@ -165,7 +106,7 @@ class BurgerBuilder extends Component {
       orderSummary = (
         <OrderSummary
           checkoutYes={this.handleCheckoutYes}
-          price={this.state.totalPrice}
+          price={this.props.price}
           Ing={this.props.ings}
           hide={this.handleHideModal}
         />
@@ -197,6 +138,7 @@ class BurgerBuilder extends Component {
 const mapStateToProps = (state) => {
   return {
     ings: state.ingredients,
+    price: state.totalPrice,
   };
 };
 

@@ -3,7 +3,6 @@ import Styles from "./BurgerControl.module.css";
 
 // Burger controller
 const burgerControl = (props) => {
-  console.log(props);
   // Convert the ingredients object's keys to array and loop through to get the ingredient's name and value
   const control = Object.keys(props.ing).map((cur) => (
     <div key={cur} className={Styles.Control}>
