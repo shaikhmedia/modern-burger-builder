@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "../../../../axios-orders";
+import { connect } from "react-redux";
+
 import Loader from "../../../Layout/Loader/Loader";
 import Form from "../../../Layout/Form/Form";
 
@@ -45,16 +47,16 @@ class ContactData extends Component {
       loading: true,
     });
 
-    let totalPrice = parseFloat(this.props.price);
+    let price = this.props.price;
 
     if (this.state.delivery === "fastest") {
-      totalPrice += 2;
+      price += 2;
     }
 
     // Create an object to post on database
     const order = {
-      ingredients: this.props.ingredients,
-      price: totalPrice,
+      ingredients: this.props.ings,
+      price: price,
       customer: this.state.customer,
       delivery: this.state.delivery,
     };
@@ -101,4 +103,11 @@ class ContactData extends Component {
   }
 }
 
-export default ContactData;
+const mapStateToProps = (state) => {
+  return {
+    ings: state.ingredients,
+    price: state.totalPrice,
+  };
+};
+
+export default connect(mapStateToProps)(ContactData);

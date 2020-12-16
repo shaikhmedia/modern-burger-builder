@@ -29,6 +29,7 @@ const form = (props) => {
       <div className={Styles.Title}>
         <p>Enter your contact details</p>
       </div>
+
       {/* Input Fields */}
       {inputFields}
 
@@ -51,9 +52,11 @@ const form = (props) => {
         />
         <label htmlFor="cheapest">Cheapest</label>
       </div>
+
       <small className={Styles.Delivery}>
         (Select Fastest and get the delivery in 20 minutes only for $2 extra)
       </small>
+
       {/* Order Now Button */}
       <Button
         disabled={disabled}
