@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import axios from "../../axios-orders";
 import { connect } from "react-redux";
 
 import Burger from "../Burger/Burger";
@@ -7,7 +6,7 @@ import BurgerControls from "../Burger/BurgerController/BurgerControls";
 import Modal from "../Layout/Modal/Modal";
 import Loader from "../Layout/Loader/Loader";
 import OrderSummary from "../Layout/OrderSummary/OrderSummary";
-import * as actionTypes from "../../store/actions";
+import * as burgerBuilderActions from "../../store/actions/burgerBuilder";
 
 class BurgerBuilder extends Component {
   // Initial state
@@ -16,16 +15,8 @@ class BurgerBuilder extends Component {
     loading: false,
   };
 
-  // Fetch the ingredients from database
   componentDidMount() {
-    // axios
-    //   .get("https://burger-builder-41792.firebaseio.com/ingredients.json")
-    //   .then((response) => {
-    //     this.setState({ ingredients: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    this.props.fetchIng();
   }
 
   // Show the modal and backdrop
@@ -144,10 +135,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addIng: (ingName) =>
-      dispatch({ type: actionTypes.ADD_INGREDIENT, ingName: ingName }),
+    addIng: (ingName) => dispatch(burgerBuilderActions.addIngredient(ingName)),
     removeIng: (ingName) =>
-      dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingName: ingName }),
+      dispatch(burgerBuilderActions.removeIngredient(ingName)),
+    fetchIng: () => dispatch(burgerBuilderActions.fetchIngredients()),
   };
 };
 
